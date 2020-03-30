@@ -1,12 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/Auth');
+const User = require('../models/User');
 const  bcrypt = require('bcrypt');
 const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const {check,validationResult} = require('express-validator');
 
-router.post('/signup',async(req,res) => {
+
+router.post(
+    '/signup',
+    [
+        check("name","Required Name").notEmpty(),
+        check("email","Please include a valid email").isEmail(),
+        check("password","Invalid Your Password,Plese enter more then 5 character").isLength({min:4})
+
+    ],
+    async(req,res) => {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json({error: errors.array()});
+        }
     const {name,email,password} = req.body;
    
     try {
@@ -28,11 +42,19 @@ router.post('/signup',async(req,res) => {
         console.log(err.message);
         res.status(500).send("Server Error");
     }
-   
-
 });
 
-router.post('/signin',async(req,res) => {
+router.post(
+    '/signin',
+    [
+        check("email","Please Enter valid email").isEmail(),
+        check("password","Plese Enter valid Password").notEmpty(),
+    ],
+    async(req,res) => {
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            return res.status(400).json({error:errors.array()})
+        }
     const {email,password} = req.body;
 
     try {
