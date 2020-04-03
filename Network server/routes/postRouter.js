@@ -56,4 +56,13 @@ router.get('/:id',auth,async (req,res) =>{
     }
 })
 
+router.delete("/:id",auth,async(req,res) =>{
+    try {
+        await Post.delete(req.param.id);
+    } catch (err){
+        console.log(err.message)
+        res.status(501).send('Server Error');
+    }
+})
+
 module.exports = router;
