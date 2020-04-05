@@ -9,6 +9,10 @@ const porfileShema = Schema({
     company:{
         type:String,
     },
+    location:{
+        type:String,
+
+    },
     skills:{
         type:[String],
         required:true
