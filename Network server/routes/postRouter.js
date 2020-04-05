@@ -46,7 +46,7 @@ router.get('/:id',auth,async (req,res) =>{
     try {
         const post = await Post.findById(req.params.id);
         if(!post){
-            return res.status(401).json({error:"Post not found"})
+            return res.status(401).json({msg:"Post not found"})
         }
         res.status(200).json(post)
     } catch (err) {
@@ -81,7 +81,7 @@ router.put("/like/:id",auth,async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
         if(post.likes.filter(like => like.userId.toString() === req.userId).length >0){
-            return res.status(400).json({error:"Post alredy liked"})
+            return res.status(400).json({msg:"Post alredy liked"})
         }
         post.likes.unshift({userId:req.userId});
 
