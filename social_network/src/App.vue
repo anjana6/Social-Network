@@ -2,7 +2,7 @@
   <v-app>
     
       <!-- <AppHeader/> -->
-      <SingInForm/>
+     <Home/>
     
   </v-app>
   
@@ -10,12 +10,12 @@
 
 <script>
 // import AppHeader from './components/AppHeader';
-import SingInForm from './components/SingInForm';
+import Home from './components/Home';
+
 export default {
   name: 'App',
   components:{
-    // AppHeader,
-    SingInForm
+    Home
   }
 };
 </script>
