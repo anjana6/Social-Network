@@ -1,5 +1,6 @@
+import axios from 'axios';
 const state = {
-    token: null
+    token: localStorage.getItem('token') || '',
 };
 
 const getters = {
@@ -7,13 +8,54 @@ const getters = {
 };
 
 const actions = {
+    loggin: ({commit}) => {
+        try {
+           const res = axios.post('http://localhost:5000/auth/signin'); 
+           const token = res.data.token;
+           localStorage.setItem('token',token);
+           commit('auth_success',token);
+        } catch (err) {
+            console.log(err.message);
+            commit('auth_fail');
+            localStorage.removeItem('token');
+        }
+        
+    },
+    register: ({commit}) => {
+        try {
+            const res = axios.post('http://localhost:5000/auth/signup');
+            const token = res.data.token;
+            localStorage.setItem('token',token);
+            commit('auth_success',token);
+        } catch (err) {
+            console.log(err.message);
+            commit('auth_fail');
+            localStorage.removeItem('token');
+        }
+    },
     logout: ({commit }) =>{
-         commit('setToken',null);
+         commit('logout');
+         localStorage.removeItem('token');
+
     }
 };
   
 const mutations = {
-    setToken:(state,token) => {
+    auth_success:(state,token) => {
         state.token = token; 
+    },
+    auth_fail:(state) => {
+        state.token='';
+    },
+    logout:(state) =>{
+        state.token=''
     }
 };
+
+export default{
+    state,
+    getters,
+    actions,
+    mutations
+
+}
