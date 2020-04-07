@@ -5,38 +5,56 @@
       <span class="title font-weight-light">LogIn</span>
     </v-card-title>
 
-    <v-form ref="form" v-model="valid" lazy-validation>
+    <v-form ref="form" lazy-validation>
       <v-card-text>
         <v-text-field
-          v-model="name"
+          v-model="email"
           prepend-icon="fas fa-at"
-          :rules="nameRules"
           label="Email"
           required
         ></v-text-field>
         <v-text-field
-          v-model="email"
+          v-model="password"
           prepend-icon="fas fa-lock"
-          :rules="emailRules"
           label="Password"
           required
         ></v-text-field>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="primary" class="mr-4" @click="reset">
+        <v-btn color="primary" class="mr-4" @click="login">
           Submit
         </v-btn>
-        <v-btn color="red" text >
+        <router-link to='/signup' tag="v-btn">
+        <v-btn color="red" text name="register">
             Register Now
         </v-btn>
+        </router-link>
       </v-card-actions>
     </v-form>
   </v-card>
-</v-container>
+</v-container> 
 </template>
 
 <script>
+
 export default {
-    name:"SignInForm"
+    name:"SignInForm",
+    data(){
+      return{
+        email:"",
+        password:""
+      }
+    },
+    methods: {
+      login: function(){
+        console.log('hii');
+        let data = {
+          email : this.email,
+          password : this.password
+        }
+        
+        this.$store.dispatch("loggin",data);
+      }
+    }
 }
 </script>

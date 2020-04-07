@@ -2,7 +2,9 @@
   <v-app>
     
       <!-- <AppHeader/> -->
-     <Home/>
+     <!-- <Home/> -->
+     <!-- <SignUpForm/> -->
+     <router-view></router-view>
     
   </v-app>
   
@@ -10,12 +12,13 @@
 
 <script>
 // import AppHeader from './components/AppHeader';
-import Home from './components/Home';
+// import Home from './components/Home';
+//import SignUpForm from './components/SignUpForm'
 
 export default {
   name: 'App',
-  components:{
-    Home
-  }
+  // components:{
+  //   SignUpForm
+  // }
 };
 </script>

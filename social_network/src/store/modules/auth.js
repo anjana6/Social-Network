@@ -8,9 +8,16 @@ const getters = {
 };
 
 const actions = {
-    loggin: ({commit}) => {
+    loggin: async({commit},body) => {
+        console.log(body);
+        const config = {
+            headers:{
+                'Content-Type':'application/json'
+            }
+        };
         try {
-           const res = axios.post('http://localhost:5000/auth/signin'); 
+           const res = await axios.post('http://localhost:5000/auth/signin',body,config); 
+           console.log(res);
            const token = res.data.token;
            localStorage.setItem('token',token);
            commit('auth_success',token);

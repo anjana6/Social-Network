@@ -57,6 +57,8 @@ router.post(
             errors.array().map(err => error[err.param] = err.msg)
             return res.status(400).json({error})
         }
+        // console.log("hoii");
+        // console.log(req.body);
     const {email,password} = req.body;
 
     try {
