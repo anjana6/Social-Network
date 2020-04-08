@@ -26,7 +26,7 @@ router.post(
     try {
         let user = await User.findOne({email});
         if(user){
-            res.status(402).json({error:"User already exists"})
+            return res.status(402).json({error:"User already exists"})
         }
 
         const avatar = gravatar.url(email,{s:"200",r:"pg",d:"mm"});
@@ -37,7 +37,15 @@ router.post(
         user.password = await bcrypt.hash(password,salt);
 
         await user.save();
-        res.status(200).json('success');
+
+        jwt.sign({id:user._id},
+            config.get("jwtSecret"),
+            {expiresIn:36000},(err,token) =>{
+                if(err) throw err;
+                res.json({token});
+            }
+    
+        );
     } catch (err) {
         console.log(err.message);
         res.status(500).send("Server Error");
@@ -64,11 +72,11 @@ router.post(
     try {
         const user = await User.findOne({email});
     if(!user){
-        res.status(400).json({error:"Please Register"})
+       return  res.status(400).json({errors:[{msg:"Please Register"}]})
     };
     const isMatch  = await bcrypt.compare(password,user.password);
     if(!isMatch){
-        res.status(400).json({error:"Your Password is not match"});
+        return res.status(400).json({error:"Your Password is not match"});
     };
      jwt.sign({id:user._id},
         config.get("jwtSecret"),

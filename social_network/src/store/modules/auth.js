@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {router} from '../../../router';
 const state = {
     token: localStorage.getItem('token') || '',
 };
@@ -20,22 +21,34 @@ const actions = {
            console.log(res);
            const token = res.data.token;
            localStorage.setItem('token',token);
+           axios.defaults.headers.common['x-auth-token'] = token
+            router.push('/post');
            commit('auth_success',token);
         } catch (err) {
-            console.log(err.message);
+            const errors = err.response.data.errors;
+            console.log(errors);
             commit('auth_fail');
             localStorage.removeItem('token');
         }
         
     },
-    register: ({commit}) => {
+    register: async({commit},body) => {
+        console.log(body);
+        const config = {
+            headers:{
+                'Content-Type':'application/json'
+            }
+        };
         try {
-            const res = axios.post('http://localhost:5000/auth/signup');
+            const res = await axios.post('http://localhost:5000/auth/signup',body,config);
+            //console.log(res);
             const token = res.data.token;
             localStorage.setItem('token',token);
+            router.push('/post');
             commit('auth_success',token);
         } catch (err) {
-            console.log(err.message);
+            const errors = err.response.data.errors;
+            console.log(errors);
             commit('auth_fail');
             localStorage.removeItem('token');
         }

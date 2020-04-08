@@ -5,7 +5,8 @@
 
         <v-toolbar-title>
           <span class="font-weight-light">DEVELOPER</span> 
-          <span>- MEDIA</span>
+          <span>- MEDIA{{isLogginIn}}</span>
+          
         </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -15,12 +16,12 @@
         <v-icon small right>fas fa-sign-in-alt</v-icon>
       </v-btn>
       </router-link> -->
-      <router-link to='/signup' tag="v-btn">
-      <v-btn depressed color="grey" name="signin">
+     
+      <v-btn depressed color="grey" name="signin" to="/signup" >
         <span>SingUp</span>
         <v-icon small right>fas fa-user-plus</v-icon>
       </v-btn>
-      </router-link>
+      
     </v-toolbar>
 
     <v-navigation-drawer v-model="drawer"  color="grey darken-4">
@@ -38,6 +39,12 @@ export default {
         return{
             drawer: false
         }
+    },
+    computed:{
+      isLogginIn: function(){
+      return this.$store.getters.isLoggedIn;
     }
+    }
+    
 };
 </script>

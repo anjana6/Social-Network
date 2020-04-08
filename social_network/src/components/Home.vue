@@ -24,7 +24,7 @@ export default {
     components:{
         AppHeader,
         SignInForm
-    }
+    },
 }
 </script>
 

@@ -24,11 +24,9 @@
         <v-btn color="primary" class="mr-4" @click="login">
           Submit
         </v-btn>
-        <router-link to='/signup' tag="v-btn">
-        <v-btn color="red" text name="register">
+        <v-btn color="red" text  to="/signup">
             Register Now
         </v-btn>
-        </router-link>
       </v-card-actions>
     </v-form>
   </v-card>
@@ -47,7 +45,7 @@ export default {
     },
     methods: {
       login: function(){
-        console.log('hii');
+        //console.log('hii');
         let data = {
           email : this.email,
           password : this.password
