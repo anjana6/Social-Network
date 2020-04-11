@@ -56,7 +56,7 @@ export default {
     },
     methods:{
         register:function(){
-            console.log('hii');
+            //console.log('hii');
             let data = {
                 name:this.name,
                 email:this.email,

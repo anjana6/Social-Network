@@ -22,7 +22,7 @@ Vue.config.productionTip = false
 // })
 const token = localStorage.getItem('token');
 if(token){
-  axios.defaults.headers.common['x-auth-token0'] = token
+  axios.defaults.headers.common['x-auth-token'] = token
 }
 
 new Vue({

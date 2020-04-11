@@ -5,7 +5,7 @@
 
         <v-toolbar-title>
           <span class="font-weight-light">DEVELOPER</span> 
-          <span>- MEDIA{{isLogginIn}}</span>
+          <span>- MEDIA</span>
           
         </v-toolbar-title>
 

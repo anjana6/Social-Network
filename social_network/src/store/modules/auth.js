@@ -18,8 +18,9 @@ const actions = {
         };
         try {
            const res = await axios.post('http://localhost:5000/auth/signin',body,config); 
-           console.log(res);
+           //console.log(res);
            const token = res.data.token;
+           console.log(token);
            localStorage.setItem('token',token);
            axios.defaults.headers.common['x-auth-token'] = token
             router.push('/post');
@@ -33,7 +34,7 @@ const actions = {
         
     },
     register: async({commit},body) => {
-        console.log(body);
+        //console.log(body);
         const config = {
             headers:{
                 'Content-Type':'application/json'

@@ -18,7 +18,7 @@
 
 <script>
 import AppHeader from './AppHeader';
-import SignInForm from './SignInForm';
+import SignInForm from '../auth/SignInForm';
 export default {
     name: "Home",
     components:{
@@ -32,7 +32,7 @@ export default {
     .back{
         width: 100%;
         height: 100%;
-        background-image: url('../assets/back.jpeg');
+        background-image: url('../../assets/back.jpeg');
         background-repeat: no-repeat ;
         background-size: cover;
     
