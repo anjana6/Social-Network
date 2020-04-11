@@ -3,7 +3,7 @@
      <AppHeader/>
      <v-container>
      <v-layout row class="home-content">
-         <v-flex xs12 md6 my-2 align-self-center="">
+         <v-flex xs12 md6 my-2 align-self-center>
             <div class="home-header">
                 <h1 class="display-3  yellow--text font-weight-bold">Developer Media</h1>
             </div>
