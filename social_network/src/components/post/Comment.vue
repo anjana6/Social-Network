@@ -8,13 +8,17 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex';
 export default {
     name:"Comment",
-    // mounted(){
-    //     const comment_id = this.$route.params.comment_id
-    //     console.log(comment_id);
-    //     //this.$store.dispatch("fetchComments",this.$route.params.comment_id);
-    //     this.$store.dispatch('fetchComments','huu');
-    // }
+    methods:{
+        ...mapActions(['fetchComments'])
+    },
+    created(){
+        const comment_id = this.$route.params.comment_id;
+        console.log(comment_id);
+        //this.$store.dispatch("fetchComments",this.$route.params.comment_id);
+        this.fetchComments(comment_id);
+    }
 }
 </script>

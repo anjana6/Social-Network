@@ -24,14 +24,17 @@ const actions = {
         }
     },
 
-    fetchComments: async(post_id) => {
+    fetchComments: async({commit},post_id) => {
         console.log('hoooo');
         console.log(post_id);
         try {
             const res = await axios.get(`http://localhost:5000/post/comment/${post_id}`);
             console.log(res.data);
+            
+            commit(console.log('ho'))
+            
         } catch (err) {
-            const errors = err.response.data.errors
+            const errors = err.response.data.errors;
             console.log(errors);
         }
     }

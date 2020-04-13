@@ -45,7 +45,7 @@
         
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn depressed  @click="fetch_comment">
+      <v-btn depressed  :to="{name:'comment',params:{comment_id:post._id}}">
         <v-icon small right>far fa-comment-alt</v-icon>
         <span>comment</span>
       </v-btn>
@@ -59,17 +59,18 @@
 </template>
 
 <script>
-
+//import {mapActions} from 'vuex';
 export default {
     name:"PostItem",
     props:['post'],
-    methods:{
-      fetch_comment: function(){
-        console.log(this.post._id);
-        let id = this.post._id
-        this.$store.dispatch('fetchComments',id)
-      }
-    }
+    // methods:{
+    //   ...mapActions(['fetchComments']),
+    //   fetch_comment: function(){
+    //     console.log(this.post._id);
+    //     let id = this.post._id
+    //     this.fetchComments(id);
+    //   }
+    // }
     
 }
 </script>
