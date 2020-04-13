@@ -1,7 +1,61 @@
 <template>
-    <div>
+    <!-- <div>
         <p>{{post.name}}</p>
-    </div>
+    </div> -->
+  <v-card
+    max-width="1000"
+    class="mx-auto"
+  >
+    <v-list-item>
+      <v-list-item-avatar color="grey darken-3">
+        <v-img :src="post.avatar"></v-img>
+      </v-list-item-avatar>
+      <v-list-item-content>
+        <v-list-item-title class="headline">{{post.name}}</v-list-item-title>
+        <v-list-item-subtitle>at {{post.date}}</v-list-item-subtitle>
+      </v-list-item-content>
+    </v-list-item>
+
+    <v-img
+      src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+      height="194"
+    ></v-img>
+
+    <v-card-text>
+      <h2>{{post.text}}</h2>
+      <v-layout row>
+      <v-flex>
+      <p v-if="post.likes.length>0"><v-icon small right>fas fa-thumbs-up</v-icon><span class="ml-1">{{post.likes.length}}</span></p>
+      </v-flex>
+      <v-flex class="text-right">
+      <p v-if="post.likes.length>0"><span>{{post.comment.length}}</span><span class="ma-2">comments</span></p>
+      </v-flex>
+      </v-layout>
+    </v-card-text>
+
+    <v-card-actions>
+      <v-btn depressed>
+         <v-icon small right>fas fa-thumbs-up</v-icon>
+        <span>Like</span>
+       
+      </v-btn>
+      <v-btn depressed>
+        <v-icon small right>fas fa-thumbs-down</v-icon>
+        <span>unlike</span>
+        
+      </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn depressed  @click="fetch_comment">
+        <v-icon small right>far fa-comment-alt</v-icon>
+        <span>comment</span>
+      </v-btn>
+      <v-btn depressed>
+        <v-icon small right>mdi-share-variant</v-icon>
+        <span>share</span>
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+
 </template>
 
 <script>
@@ -9,7 +63,13 @@
 export default {
     name:"PostItem",
     props:['post'],
-
+    methods:{
+      fetch_comment: function(){
+        console.log(this.post._id);
+        let id = this.post._id
+        this.$store.dispatch('fetchComments',id)
+      }
+    }
     
 }
 </script>

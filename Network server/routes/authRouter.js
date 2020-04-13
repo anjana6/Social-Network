@@ -76,7 +76,7 @@ router.post(
     };
     const isMatch  = await bcrypt.compare(password,user.password);
     if(!isMatch){
-        return res.status(400).json({error:"Your Password is not match"});
+        return res.status(400).json({errors:[{msg:"Your Password is not match"}]});
     };
      jwt.sign({id:user._id},
         config.get("jwtSecret"),

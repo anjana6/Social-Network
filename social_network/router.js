@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from './src/store/index';
+
 import Home from './src/components/layout/Home';
 import SignUpForm from './src/components/auth/SignUpForm';
 import Post from './src/components/post/Post';
-import store from './src/store/index';
+import Comment from './src/components/post/Comment';
+
 
 
 Vue.use(VueRouter);
@@ -23,8 +26,9 @@ const ifAuthenticated = (to,from,next) =>{
 export const router = new VueRouter({
     mode:'history',
   routes:[
-    {path:'/',component:Home,beforeEnter:ifAuthenticated},
-    {path:'/signup', component:SignUpForm},
-    {path:'/post',component:Post}
+    {path:'/',name:'home',component:Home,beforeEnter:ifAuthenticated},
+    {path:'/signup',name:'signup',component:SignUpForm},
+    {path:'/post',name:'post',component:Post},
+    {path:'/comment',name:'comment',component:Comment}
   ]
 })

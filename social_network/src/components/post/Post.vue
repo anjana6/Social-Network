@@ -6,19 +6,15 @@
             </v-flex>
         </v-layout>
 
-    <div v-if="allPosts.length>0">
-       
-        <PostItem 
+    <div v-if="allPosts.length>0" class="ma-2">
+       <PostItem 
             v-for="post in allPosts"
             :key="post.id"
             :post="post"
-            />
-            
-            <!-- <div v-rpeat="post in allpost">
-                {{post.name}}
-            </div> -->
-        
-        
+            />   
+    </div>
+    <div v-else>
+        <p>No Post Here...</p>
     </div>
         
     </v-container>

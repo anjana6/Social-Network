@@ -3,6 +3,7 @@ import axios from "axios";
 const state ={
     loading: true,
      posts : [],
+     comments:[],
      post : null
 }
 
@@ -13,18 +14,26 @@ const getters = {
 
 const actions = {
     fetchPosts: async({commit}) => {
-        //console.log('hii');
         try {
             const res = await axios.get('http://localhost:5000/post/');
             console.log(res.data);
             commit('get_post',res.data);
         } catch (err) {
-            console.log(err.message);
+            const errors = err.response.data.errors;
+            console.log(errors);
         }
     },
 
-    fetchPost: () =>{
-
+    fetchComments: async(post_id) => {
+        console.log('hoooo');
+        console.log(post_id);
+        try {
+            const res = await axios.get(`http://localhost:5000/post/comment/${post_id}`);
+            console.log(res.data);
+        } catch (err) {
+            const errors = err.response.data.errors
+            console.log(errors);
+        }
     }
 }
 

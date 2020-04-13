@@ -15,10 +15,9 @@
 // import Home from './components/Home';
 //import SignUpForm from './components/SignUpForm'
 
+
 export default {
+  
   name: 'App',
-  // components:{
-  //   SignUpForm
-  // }
 };
 </script>

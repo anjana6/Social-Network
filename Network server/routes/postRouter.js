@@ -42,19 +42,6 @@ router.get('/',auth,async (req,res) => {
     }
 })
 
-router.get('/:id',auth,async (req,res) =>{
-    try {
-        const post = await Post.findById(req.params.id);
-        if(!post){
-            return res.status(401).json({msg:"Post not found"})
-        }
-        res.status(200).json(post)
-    } catch (err) {
-        console.log(err.message);
-        res.status(501).send('Server Error');
-        
-    }
-})
 
 router.delete("/:id",auth,async(req,res) =>{
     try {
@@ -117,8 +104,12 @@ router.put("/unlike/:id",auth,async(req,res) =>{
 router.post("/comment/:id",auth,async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
+        const user = await User.findById(req.userId).select("-password");
+        console.log(user);
         const newcomment = {
             text:req.body.text,
+            name:user.name,
+            avatar:user.avatar,
             userId:req.userId,
         }
         post.comment.unshift(newcomment);
@@ -129,7 +120,23 @@ router.post("/comment/:id",auth,async(req,res) => {
         res.status(500).json({error:"Server Error"});
         
     }
-})
+});
+
+router.get('/comment/:id',auth,async (req,res) =>{
+    try {
+        const post = await Post.findById(req.params.id);
+        if(!post){
+            return res.status(401).json({msg:"Post not found"})
+        }
+        res.status(200).json(post.comment);
+    } catch (err) {
+        console.log(err.message);
+        res.status(501).send('Server Error');
+        
+    }
+});
+
+
 
 router.delete("/comment/:id/:comment_id",auth,async (req,res) => {
     try {
