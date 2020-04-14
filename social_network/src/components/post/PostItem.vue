@@ -59,18 +59,8 @@
 </template>
 
 <script>
-//import {mapActions} from 'vuex';
 export default {
     name:"PostItem",
     props:['post'],
-    // methods:{
-    //   ...mapActions(['fetchComments']),
-    //   fetch_comment: function(){
-    //     console.log(this.post._id);
-    //     let id = this.post._id
-    //     this.fetchComments(id);
-    //   }
-    // }
-    
 }
 </script>

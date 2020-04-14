@@ -34,7 +34,7 @@
 </template>
 
 <script>
-
+import {mapActions} from 'vuex';
 export default {
     name:"SignInForm",
     data(){
@@ -44,14 +44,13 @@ export default {
       }
     },
     methods: {
+      ...mapActions(['loggin']),
       login: function(){
-        //console.log('hii');
         let data = {
           email : this.email,
           password : this.password
         }
-        
-        this.$store.dispatch("loggin",data);
+        this.loggin(data);
       }
     }
 }

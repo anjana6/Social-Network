@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
     name:"SignUpForm",
     data(){
@@ -55,14 +56,15 @@ export default {
         }
     },
     methods:{
+        ...mapActions(['register']),
         register:function(){
-            //console.log('hii');
             let data = {
                 name:this.name,
                 email:this.email,
                 password:this.password
             }
-            this.$store.dispatch('register',data);
+            // this.$store.dispatch('register',data);
+            this.register(data);
             
         }
     }

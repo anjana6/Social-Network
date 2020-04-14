@@ -16,8 +16,6 @@ export default {
     },
     created(){
         const comment_id = this.$route.params.comment_id;
-        console.log(comment_id);
-        //this.$store.dispatch("fetchComments",this.$route.params.comment_id);
         this.fetchComments(comment_id);
     }
 }
