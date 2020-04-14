@@ -28,7 +28,7 @@
       <p v-if="post.likes.length>0"><v-icon small right>fas fa-thumbs-up</v-icon><span class="ml-1">{{post.likes.length}}</span></p>
       </v-flex>
       <v-flex class="text-right">
-      <p v-if="post.likes.length>0"><span>{{post.comment.length}}</span><span class="ma-2">comments</span></p>
+      <p v-if="post.comment.length>0"><span>{{post.comment.length}}</span><span class="ma-2">comments</span></p>
       </v-flex>
       </v-layout>
     </v-card-text>

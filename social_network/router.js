@@ -24,11 +24,12 @@ const ifAuthenticated = (to,from,next) =>{
 }
 
 export const router = new VueRouter({
+  // default is hash router so we use mode for conver to browser router(rmove the # in your url)
     mode:'history',
   routes:[
     {path:'/',name:'home',component:Home,beforeEnter:ifAuthenticated},
     {path:'/signup',name:'signup',component:SignUpForm},
     {path:'/post',name:'post',component:Post},
-    {path:'/comment/comment_id',name:'comment',component:Comment}
+    {path:'/comment/:comment_id',name:'comment',component:Comment}
   ]
 })

@@ -105,14 +105,14 @@ router.post("/comment/:id",auth,async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
         const user = await User.findById(req.userId).select("-password");
-        console.log(user);
+        //console.log(user);
         const newcomment = {
             text:req.body.text,
             name:user.name,
             avatar:user.avatar,
             userId:req.userId,
         }
-        post.comment.unshift(newcomment);
+        post.comment.push(newcomment);
         await post.save()
         res.status(200).json(post.comment)
     } catch (err) {

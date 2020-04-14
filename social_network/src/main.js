@@ -9,17 +9,8 @@ import {router} from '../router';
 import axios from 'axios';
 
 
-Vue.config.productionTip = false
-// Vue.use(VueRouter);
+Vue.config.productionTip = false;
 
-// export const router = new VueRouter({
-//   // default is hash router so we use mode for conver to browser router(rmove the # in your url)
-//   mode:'history',
-//   routes:[
-//     {path:'/',component:Home},
-//     {path:'/signup', component:SignUpForm}
-//   ]
-// })
 const token = localStorage.getItem('token');
 if(token){
   axios.defaults.headers.common['x-auth-token'] = token
