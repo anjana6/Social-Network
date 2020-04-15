@@ -1,11 +1,5 @@
 <template>
-    <!-- <div>
-        <p>{{post.name}}</p>
-    </div> -->
-  <v-card
-    max-width="1000"
-    class="mx-auto"
-  >
+  <v-card max-width="1000" class="mx-auto">
     <v-list-item>
       <v-list-item-avatar color="grey darken-3">
         <v-img :src="post.avatar"></v-img>
@@ -24,26 +18,27 @@
     <v-card-text>
       <h2>{{post.text}}</h2>
       <v-layout row>
-      <v-flex>
-      <p v-if="post.likes.length>0"><v-icon small right>fas fa-thumbs-up</v-icon><span class="ml-1">{{post.likes.length}}</span></p>
-      </v-flex>
-      <v-flex class="text-right">
-      <p v-if="post.comment.length>0"><span>{{post.comment.length}}</span><span class="ma-2">comments</span></p>
-      </v-flex>
+        <v-flex>
+          <p v-if="post.likes.length>0"><v-icon small right>fas fa-thumbs-up</v-icon><span class="ml-1">{{post.likes.length}}</span></p>
+        </v-flex>
+        <v-flex class="text-right">
+          <p v-if="post.comment.length>0"><span>{{post.comment.length}}</span><span class="ma-2">comments</span></p>
+        </v-flex>
       </v-layout>
     </v-card-text>
 
     <v-card-actions>
       <v-btn depressed @click="addlike">
-         <v-icon small right>fas fa-thumbs-up</v-icon>
+        <v-icon small right>fas fa-thumbs-up</v-icon>
         <span>Like</span> 
       </v-btn>
       <v-btn v-if="post.likes.length>0" depressed @click="removelike">
         <v-icon small right>fas fa-thumbs-down</v-icon>
-        <span>unlike</span>
-        
+        <span>unlike</span>  
       </v-btn>
+
       <v-spacer></v-spacer>
+
       <v-btn depressed  :to="{name:'comment',params:{comment_id:post._id}}">
         <v-icon small right>far fa-comment-alt</v-icon>
         <span>comment</span>
@@ -54,7 +49,6 @@
       </v-btn>
     </v-card-actions>
   </v-card>
-
 </template>
 
 <script>

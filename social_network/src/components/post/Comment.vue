@@ -37,9 +37,7 @@
                         <span>SEND</span>
                     </v-btn>
                 </v-flex>
-            </v-layout>
-
-            
+            </v-layout>        
     </v-container>
 </template>
 

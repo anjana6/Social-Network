@@ -23,6 +23,24 @@ const actions = {
             console.log(errors);
         }
     },
+    addPost: async({commit},text) => {
+        console.log(text);
+        const config = {
+            headers:{
+                'Content-Type':'application/json'
+            }
+        };
+        const body = JSON.stringify({text});
+        try {
+            const res = await axios.post('http://localhost:5000/post/',body,config);
+            console.log(res.data);
+            commit('add_post');
+        } catch (err) {
+            const errors = err.response.data.errors;
+            console.log(errors);
+            
+        }
+    },
 
     fetchComments: async({commit},post_id) => {
         try {
@@ -85,6 +103,9 @@ const mutations = {
     },
     update_like: (state,{res,id}) => {
         state.posts = state.posts.map(post => post._id === id? {...post,likes:res.data}: post );
+    },
+    add_post: (state) => {
+        console.log(state);
     }
 }
 

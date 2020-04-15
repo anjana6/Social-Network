@@ -6,6 +6,7 @@ import Home from './src/components/layout/Home';
 import SignUpForm from './src/components/auth/SignUpForm';
 import Post from './src/components/post/Post';
 import Comment from './src/components/post/Comment';
+import AddPost from './src/components/post/AddPost';
 
 
 
@@ -30,6 +31,7 @@ export const router = new VueRouter({
     {path:'/',name:'home',component:Home,beforeEnter:ifAuthenticated},
     {path:'/signup',name:'signup',component:SignUpForm},
     {path:'/post',name:'post',component:Post},
-    {path:'/comment/:comment_id',name:'comment',component:Comment}
+    {path:'/comment/:comment_id',name:'comment',component:Comment},
+    {path:'/addpost',name:'addpost',component:AddPost}
   ]
 })
