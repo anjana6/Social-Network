@@ -1,13 +1,10 @@
 <template>
 <v-flex md6>
-    <v-container>
-    <!-- <div>{{comment.name}}</div> -->
     
+    <!-- <div>{{comment.name}}</div> -->
+    <v-container>
        
-            <v-card
-    max-width="500"
-    class="mx-auto"
-  >
+            <v-card max-width="500" class="mx-auto">
     <v-list-item>
       <v-list-item-avatar color="grey darken-3">
         <v-img :src="comment.avatar"></v-img>
@@ -20,9 +17,9 @@
     </v-list-item>
     <v-card-text>{{comment.date}}</v-card-text>
   </v-card>
-    
-    
     </v-container>
+    
+    
 </v-flex>
 </template>
 

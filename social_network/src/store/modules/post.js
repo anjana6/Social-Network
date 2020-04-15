@@ -17,7 +17,6 @@ const actions = {
     fetchPosts: async({commit}) => {
         try {
             const res = await axios.get('http://localhost:5000/post/');
-            console.log(res.data);
             commit('get_post',res.data);
         } catch (err) {
             const errors = err.response.data.errors;
@@ -28,10 +27,7 @@ const actions = {
     fetchComments: async({commit},post_id) => {
         try {
             const res = await axios.get(`http://localhost:5000/post/comment/${post_id}`);
-            console.log(res.data);
-            
-            commit('fetch_comments',res.data);
-            
+            commit('fetch_comments',res.data);    
         } catch (err) {
             const errors = err.response.data.errors;
             console.log(errors);
@@ -53,6 +49,26 @@ const actions = {
             const errors = err.response.data.errors;
             console.log(errors);
         }
+    },
+
+    addLike: async({commit},id) => {
+        console.log(id);
+        try {
+            const res = await axios.put(`http://localhost:5000/post/like/${id}`);
+            commit('update_like',{res,id});
+        } catch (err) {
+            const errors = err.response.data.errors;
+            console.log(errors);    
+        }
+    },
+    removeLike: async({commit},id) => {
+        try {
+            const res = await axios.put(`http://localhost:5000/post/unlike/${id}`);
+            commit('update_like',{res,id});
+        } catch (err) {
+            const errors = err.response.data.errors;
+            console.log(errors);    
+        }
     }
 }
 
@@ -66,6 +82,9 @@ const mutations = {
     },
     add_comment:(state,comment) => {
         state.comments = comment;
+    },
+    update_like: (state,{res,id}) => {
+        state.posts = state.posts.map(post => post._id === id? {...post,likes:res.data}: post );
     }
 }
 

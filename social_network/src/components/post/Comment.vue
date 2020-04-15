@@ -1,16 +1,15 @@
 <template>
     <v-container>
         <v-layout row>
-            
-                <v-flex>
+            <v-flex>
                 <v-btn depressed to="/post">
                     <v-icon left>fas fa-arrow-circle-left</v-icon>
                     Back
                 </v-btn>
-                </v-flex>
-                <v-flex>
-                <h1>Comments</h1>
-                </v-flex>
+            </v-flex>
+            <v-flex>
+                <h1>COMMENTS</h1>
+            </v-flex>
         </v-layout>
         
         <v-layout row>
@@ -20,8 +19,7 @@
                 :comment="comment"
                 />
         </v-layout>
-        <div class="formcontent">
-            <v-layout row >
+            <v-layout row  class="mt-5">
                 <v-flex xs10>
                     <v-text-field
                         background-color="#C4D4D1"
@@ -30,7 +28,7 @@
                         rounded
                         dense
                         v-model="comment"
-                        class="ma-5"
+    
                     ></v-text-field>
                 </v-flex>
                 <v-flex xs2>
@@ -40,7 +38,7 @@
                     </v-btn>
                 </v-flex>
             </v-layout>
-        </div>
+
             
     </v-container>
 </template>
@@ -76,7 +74,4 @@ export default {
 </script>
 
 <style  scoped>
-    .formcontent{
-        padding: 5px;
-    }
 </style>

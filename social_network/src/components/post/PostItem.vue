@@ -34,12 +34,11 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn depressed>
+      <v-btn depressed @click="addlike">
          <v-icon small right>fas fa-thumbs-up</v-icon>
-        <span>Like</span>
-       
+        <span>Like</span> 
       </v-btn>
-      <v-btn depressed>
+      <v-btn v-if="post.likes.length>0" depressed @click="removelike">
         <v-icon small right>fas fa-thumbs-down</v-icon>
         <span>unlike</span>
         
@@ -59,8 +58,19 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
     name:"PostItem",
     props:['post'],
+    methods:{
+      ...mapActions(['addLike','removeLike']),
+      addlike: function(){
+        //console.log(this.post._id);
+        this.addLike(this.post._id);
+      },
+      removelike: function(){
+        this.removeLike(this.post._id);
+      }
+    }
 }
 </script>
