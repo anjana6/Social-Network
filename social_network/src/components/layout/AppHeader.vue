@@ -1,8 +1,8 @@
 <template>
 
     <nav>
-        <v-toolbar flat dark color="grey" dense app>
-          <v-app-bar-nav-icon  @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-toolbar flat dark color="grey" dense>
+          <v-app-bar-nav-icon v-if="isLoggedIn" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
             <v-toolbar-title>
               <span class="font-weight-light">DEVELOPER</span> 
@@ -10,37 +10,41 @@
             </v-toolbar-title>
             
           <v-spacer></v-spacer>
-
-            <v-btn depressed color="grey" name="signin" to="/signup" >
+          <div v-if="isLoggedIn">
+            <v-btn depressed color="grey">
+              <span>Home</span>
+              <v-icon small right>fas fa-home</v-icon>
+            </v-btn>
+              <v-btn  depressed color="grey" name="signin" to="/signup" @click="logout" >
+              <span>LogOut</span>
+              <v-icon small right>fas fa-sign-out-alt</v-icon>
+            </v-btn>
+          </div>
+          <div v-else>
+            <v-btn  depressed color="grey" name="signin" to="/signup" >
               <span>SingUp</span>
               <v-icon small right>fas fa-user-plus</v-icon>
             </v-btn>
+          </div>
         </v-toolbar>
-         
-        
-        <v-navigation-drawer v-model="drawer" app color="grey darken-4" touchless >
-          
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="title">
-            Application
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            subtext
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+      <v-navigation-drawer v-model="drawer" app dark color="grey darken-4" temporary >
+        <v-list-item two-line>
+          <v-list-item-avatar>
+            <img src="https://randomuser.me/api/portraits/women/81.jpg">
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>Jane Smith</v-list-item-title>
+            <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
 
       <v-divider></v-divider>
 
-      <v-list
-        dense
-        nav
-      >
+      <v-list dense nav>
         <v-list-item
           v-for="link in links"
           :key="link.text"
-          link
+          :to="link.route"
         >
           <v-list-item-icon>
             <v-icon>{{ link.icon }}</v-icon>
@@ -59,6 +63,7 @@
 </template>
 
 <script>
+import {mapActions,mapGetters} from 'vuex';
 export default {
     name:'AppHeader',
     data(){
@@ -71,9 +76,10 @@ export default {
         }
     },
     computed:{
-      isLogginIn: function(){
-      return this.$store.getters.isLoggedIn;
-    }
+      ...mapGetters(['isLoggedIn'])
+    },
+    methods:{
+      ...mapActions(['logout'])
     }
     
 };

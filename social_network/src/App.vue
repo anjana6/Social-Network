@@ -1,7 +1,7 @@
 <template>
   <v-app>
     
-      <!-- <AppHeader/> -->
+      <AppHeader/>
      <!-- <Home/> -->
      <!-- <SignUpForm/> -->
      <router-view></router-view>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-// import AppHeader from './components/AppHeader';
+import AppHeader from './components/layout/AppHeader';
 // import Home from './components/Home';
 //import SignUpForm from './components/SignUpForm'
 
@@ -19,5 +19,8 @@
 export default {
   
   name: 'App',
+  components:{
+    AppHeader
+  }
 };
 </script>

@@ -57,6 +57,7 @@ const actions = {
     logout: ({commit }) =>{
          commit('logout');
          localStorage.removeItem('token');
+         router.push('/')
 
     }
 };

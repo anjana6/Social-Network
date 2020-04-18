@@ -1,6 +1,5 @@
 <template>
  <div class="back">
-     <AppHeader/>
      <v-container>
      <v-layout row class="home-content">
          <v-flex xs12 md6 my-2 align-self-center>
@@ -17,12 +16,11 @@
 </template>
 
 <script>
-import AppHeader from './AppHeader';
+
 import SignInForm from '../auth/SignInForm';
 export default {
     name: "Home",
     components:{
-        AppHeader,
         SignInForm
     },
 }
