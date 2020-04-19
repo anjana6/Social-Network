@@ -10,7 +10,7 @@ const router = express.Router();
 router.post("/",auth,async(req,res) => {
     const {company,skills,location} = req.body;
     const profileField = {}
-    profileField.user = req.userId;
+    profileField.user = req.user.id;
     if(company) profileField.company = company;
     if(location) profileField.location = location;
      profileField.skills = skills.split(',').map(skill => skill.trim());
@@ -29,7 +29,9 @@ router.post("/",auth,async(req,res) => {
 
 router.get('/me',auth,async (req,res) => {
     try {
-        const profile = await Profile.findOne({user:req.userId}).populate('User',['name','avatar']);
+        const profile = await Profile.findOne({user:req.user.id})
+        .populate('user',['name','avatar']);
+        console.log(profile)
         if(!profile){
             return res.status(401).json({msg:"There is no profile for you"})
         }
@@ -58,11 +60,11 @@ router.get("/user/:user_id",async(req,res) => {
 
 router.delete("/",auth,async(req,res) => {
     try {
-        await Post.deleteMany({user: req.userId});
+        await Post.deleteMany({user: req.user.id});
         
-        await Profile.findOneAndRemove({user:req.userId});
+        await Profile.findOneAndRemove({user:req.user.id});
 
-        await User.findOneAndRemove({_id:req.userId});
+        await User.findOneAndRemove({_id:req.user.id});
     } catch (err) {
         console.log(err.message);
         res.status(500).send("Server Error");

@@ -6,6 +6,7 @@ const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const {check,validationResult} = require('express-validator');
+const auth = require('../middleware/auth');
 
 
 router.post(
@@ -38,7 +39,14 @@ router.post(
 
         await user.save();
 
-        jwt.sign({id:user._id},
+        const payload = {
+            user:{
+                id: user._id,
+                name: user.name
+            }
+        }
+
+        jwt.sign(payload,
             config.get("jwtSecret"),
             {expiresIn:36000},(err,token) =>{
                 if(err) throw err;
@@ -78,7 +86,14 @@ router.post(
     if(!isMatch){
         return res.status(400).json({errors:[{msg:"Your Password is not match"}]});
     };
-     jwt.sign({id:user._id},
+
+    const payload = {
+        user:{
+            id: user._id,
+            name: user.name
+        }
+    }
+     jwt.sign(payload,
         config.get("jwtSecret"),
         {expiresIn:36000},(err,token) =>{
             if(err) throw err;
@@ -94,5 +109,11 @@ router.post(
     
 
 });
+
+router.get('/',auth,async(req,res) => {
+    const user = await User.findById(req.userId);
+    res.status(200).json(user);
+
+})
 
 module.exports = router;

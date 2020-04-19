@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const porfileShema = Schema({
     user: {
         type:Schema.Types.ObjectId,
-        ref: "User"
+        ref: 'User'
     },
     company:{
         type:String,

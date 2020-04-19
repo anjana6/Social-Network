@@ -42,7 +42,7 @@ export default {
         ...mapGetters(['allPost'])
     },
     methods:{
-        ...mapActions(['fetchPosts'])
+        ...mapActions(['fetchPosts',])
     },
     created(){
             // this.$store.dispatch("fetchPosts")

@@ -10,15 +10,15 @@ router.post("/",auth,async(req,res) => {
     
     try {
         //console.log(req.userId);
-        const user = await User.findById(req.userId).select("-password");
+        const user = await User.findById(req.user.id).select("-password");
         //console.log(user);
         const newPost = new Post({
             text:req.body.text,
             name:user.name,
             avatar:user.avatar,
-            user:req.userId
+            user:req.user.id
 
-        })  ;
+        });
 
         const post = await newPost.save();
         res.status(200).json({post});
@@ -50,7 +50,7 @@ router.delete("/:id",auth,async(req,res) =>{
         if(!post){
             return res.status(401).json({msg:"post not found"});
         }
-        if(post.user.toString() !== req.userId){
+        if(post.user.toString() !== req.user.id){
             return res.status(401).json({msg:"user not Authorized"})
         }
         await post.remove();
@@ -67,10 +67,10 @@ router.delete("/:id",auth,async(req,res) =>{
 router.put("/like/:id",auth,async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
-        if(post.likes.filter(like => like.userId.toString() === req.userId).length >0){
+        if(post.likes.filter(like => like.userId.toString() === req.user.id).length >0){
             return res.status(400).json({msg:"Post alredy liked"})
         }
-        post.likes.unshift({userId:req.userId});
+        post.likes.unshift({userId:req.user.id});
 
         await post.save();
 
@@ -86,10 +86,10 @@ router.put("/unlike/:id",auth,async(req,res) =>{
     try {
         const post = await Post.findById(req.params.id);
 
-        if(post.likes.filter(like => like.userId.toString() === req.userId).length === 0){
+        if(post.likes.filter(like => like.userId.toString() === req.user.id).length === 0){
             return res.status(400).json({msg:"Post has not yet liked"});
         }
-        const removeIndex = post.likes.map(like => like.userId.toString()).indexOf(req.userId);
+        const removeIndex = post.likes.map(like => like.userId.toString()).indexOf(req.user.id);
 
         post.likes.splice(removeIndex,1);
         await post.save();
@@ -104,13 +104,13 @@ router.put("/unlike/:id",auth,async(req,res) =>{
 router.post("/comment/:id",auth,async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
-        const user = await User.findById(req.userId).select("-password");
+        const user = await User.findById(req.user.id).select("-password");
         //console.log(user);
         const newcomment = {
             text:req.body.text,
             name:user.name,
             avatar:user.avatar,
-            userId:req.userId,
+            userId:req.user.id,
         }
         post.comment.push(newcomment);
         await post.save()
@@ -146,10 +146,10 @@ router.delete("/comment/:id/:comment_id",auth,async (req,res) => {
         if(!comment){
             return res.status(401).json({msg:"comment is not found"})
         }
-        if(comment.userId.toString() !== req.userId){
+        if(comment.userId.toString() !== req.user.id){
             res.status(401).json({msg:"User not authorzed"})
         }
-        const removeIndex = post.comment.map(comment => comment.userId.toString()).indexOf(req.userId);
+        const removeIndex = post.comment.map(comment => comment.userId.toString()).indexOf(req.user.id);
 
         post.comment.splice(removeIndex,1);
 
