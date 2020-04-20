@@ -44,6 +44,19 @@ router.get('/me',auth,async (req,res) => {
     }
 })
 
+router.get('/',auth,async (req,res) => {
+    try {
+        const profiles = await Profile.find().populate('user',['name','avatar']);
+        if(!profiles){
+            return res.status(401).json({msg:"There is no developer yet"});
+        }
+        res.json(profiles);
+    } catch (err) {
+        console.log(err.message);
+        res.status(501).send('Server Error');
+    }
+})
+
 router.get("/user/:user_id",async(req,res) => {
     try {
         const profile = await Profile.findOne({user:req.params.user_id}).populate('User',['name','avatar']);

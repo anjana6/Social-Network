@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const state = {
-    profile: null
+    profile: null,
+    profiles: []
 }
 
 const getters = {
@@ -11,7 +12,7 @@ const getters = {
 
 const actions = {
     fetchProfile: async({commit}) => {
-        console.log("ooo");
+        //console.log("ooo");
         try {
             const res = await axios.get('http://localhost:5000/profile/me');
             console.log(res.data);
@@ -20,6 +21,18 @@ const actions = {
             const error = err.reponse.data.errors
             console.log(error);
         }
+    },
+    fetchProfiles: async ({commit}) =>{
+        try {
+        console.log('pofils')
+        const res = await axios.get('http://localhost:5000/profile/');
+        console.log(res.data);
+        commit(console.log('he'));
+        } catch (err) {
+            const error = err.reponse.data.errors;
+            console.log(error);
+        }
+        
     }
 }
 
