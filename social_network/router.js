@@ -9,6 +9,7 @@ import Comment from './src/components/post/Comment';
 import AddPost from './src/components/post/AddPost';
 import Profile from './src/components/profile/Profile';
 import DeveloperProfile from './src/components/profile/DeveloperProfile';
+import About from './src/components/profile/About'
 
 
 
@@ -37,5 +38,6 @@ export const router = new VueRouter({
     {path:'/addpost',name:'addpost',component:AddPost},
     {path:'/profile',name:'profile',component:Profile},
     {path:'/developer',name:'developer', component: DeveloperProfile},
+    {path:'/about',name:'about',component: About}
   ]
 })

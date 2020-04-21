@@ -7,7 +7,8 @@ const state = {
 
 const getters = {
     isProfile: state => !! state.profile,
-    profile: state => state.profile
+    profile: state => state.profile,
+    profiles: state => state.profiles
 }
 
 const actions = {
@@ -27,7 +28,7 @@ const actions = {
         console.log('pofils')
         const res = await axios.get('http://localhost:5000/profile/');
         console.log(res.data);
-        commit(console.log('he'));
+        commit('fetch_profiles',res.data);
         } catch (err) {
             const error = err.reponse.data.errors;
             console.log(error);
@@ -39,6 +40,9 @@ const actions = {
 const mutations = {
     fetch_profile: (state,profile) => {
         state.profile = profile
+    },
+    fetch_profiles:(state,profiles) => {
+        state.profiles = profiles
     }
 }
 
