@@ -14,10 +14,10 @@ export default {
         ...mapGetters(['profile','isProfile'])
     },
     methods:{
-        ...mapActions(['fetchProfile'])
+        ...mapActions(['fetchOwnerProfile'])
     },
     created(){
-        this.fetchProfile()
+        this.fetchOwnerProfile()
     }
 
 }

@@ -1,7 +1,7 @@
 <template>
   <v-container>
       <v-layout row v-if="profiles.length>0">
-         <v-flex v-for="profile in profiles" :key="profile.id" xs12 md6 lg4>
+         <v-flex v-for="profile in profiles" :key="profile._id" xs12 md6 lg4>
             <v-card class="mx-auto" max-width="344" outlined>
                <v-list-item three-line>
                  <v-list-item-content>
@@ -18,7 +18,7 @@
              </v-list-item>
 
              <v-card-actions>
-                <v-btn to="/about" text>ABOUT</v-btn>
+                <v-btn :to="{name:'about',params:{id:profile._id}}" text>ABOUT</v-btn>
              </v-card-actions>
             </v-card>
          </v-flex>

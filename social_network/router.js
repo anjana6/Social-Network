@@ -38,6 +38,6 @@ export const router = new VueRouter({
     {path:'/addpost',name:'addpost',component:AddPost},
     {path:'/profile',name:'profile',component:Profile},
     {path:'/developer',name:'developer', component: DeveloperProfile},
-    {path:'/about',name:'about',component: About}
+    {path:'/about/:id',name:'about',component: About}
   ]
 })
