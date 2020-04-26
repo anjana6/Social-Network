@@ -8,13 +8,26 @@ const router = express.Router();
 
 
 router.post("/",auth,async(req,res) => {
-    const {company,skills,location} = req.body;
+   const {workplace,currentcity,hometown,skills,pirmeryschool,secondaryschool,university,birthday,
+religious,gender,sivilstatus,mobileNo,telNo} = req.body;
+
     const profileField = {}
     profileField.user = req.user.id;
-    if(company) profileField.company = company;
-    if(location) profileField.location = location;
-     profileField.skills = skills.split(',').map(skill => skill.trim());
-    //console.log(newSkills);
+    if(workplace) profileField.workplace = workplace;
+    profileField.currentcity = currentcity;
+    profileField.hometown = hometown;
+    profileField.skills = skills.split(',').map(skill => skill.trim());
+    if(primeryschool) profileField.primeryschool = primeryschool;
+    profileField.secondaryschool = secondaryschool;
+    if(university) profileField.university = university;
+    if(birthday) profileField.birthday = birthday;
+    if(religious) profileField.religious = religious;
+    if(gender) profileField.gender = gender;
+    if(sivilstatus) profileField.sivilstatus = sivilstatus;
+    if(mobileNo) profileField.mobileNo = mobileNo;
+    if(telNo) profileField.telNo = telNo;
+
+    
      try {
         const profile = new Profile(profileField);
         await profile.save()

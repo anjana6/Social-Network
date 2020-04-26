@@ -12,12 +12,12 @@
         </v-content>
        <v-content>
          <v-layout row>
-            <v-flex md4>
+            <v-flex md4 v-if="!!profile.workplace">
                 <v-banner two-line>
                     <v-avatar slot="icon" color="primary accent-4" size="40">
                     <v-icon color="white">fas fa-briefcase</v-icon>
                     </v-avatar>
-                        MObios<br><span>work palce</span>
+                        {{profile.workplace}}<br><span class="grey--text caption">Work Palce</span>
                 </v-banner>
             </v-flex>
             <v-flex md4>
@@ -25,7 +25,7 @@
                     <v-avatar slot="icon" color="primary accent-4" size="40">
                     <v-icon color="white">fas fa-home</v-icon>
                     </v-avatar>
-                        MObios<br><span>current city</span>
+                        {{profile.currentcity}}<br><span class="grey--text caption">Current City</span>
                 </v-banner>
             </v-flex>
             <v-flex md4>
@@ -33,7 +33,7 @@
                     <v-avatar slot="icon" color="primary accent-4" size="40">
                     <v-icon color="white">fas fa-map-marker-alt</v-icon>
                     </v-avatar>
-                        MObios<br><span>Home twon</span>
+                        {{profile.hometown}}<br><span class="grey--text caption">Home Town</span>
                 </v-banner>
             </v-flex>
          </v-layout>
@@ -41,20 +41,28 @@
        <v-content>
         <h2>Education</h2>
          <v-layout row>
-            <v-flex md6>
+            <v-flex md6 v-if="profile.primeryschool">
                 <v-banner two-line>
                     <v-avatar slot="icon" color="primary accent-4" size="40">
-                    <v-icon color="white">fas fa-map-marker-alt</v-icon>
+                    <v-icon color="white">fas fa-graduation-cap</v-icon>
                     </v-avatar>
-                        MObios<br><span>school</span>
+                        {{profile.primeryschool}}<br><span class="grey--text caption">Primery School</span>
                 </v-banner>
             </v-flex>
             <v-flex md6>
                 <v-banner two-line>
                     <v-avatar slot="icon" color="primary accent-4" size="40">
-                    <v-icon color="white">fas fa-map-marker-alt</v-icon>
+                    <v-icon color="white">fas fa-graduation-cap</v-icon>
                     </v-avatar>
-                        MObios<br><span>campus</span>
+                        {{profile.secondaryschool}}<br><span class="grey--text caption">Secondary School</span>
+                </v-banner>
+            </v-flex>
+            <v-flex md6 v-if="profile.university">
+                <v-banner two-line>
+                    <v-avatar slot="icon" color="primary accent-4" size="40">
+                    <v-icon color="white">fas fa-graduation-cap</v-icon>
+                    </v-avatar>
+                        {{profile.university}}<br><span class="grey--text caption">University</span>
                 </v-banner>
             </v-flex>
          </v-layout>
@@ -62,47 +70,64 @@
         <v-content>
         <h2>Basic Info</h2>
          <v-layout row>
-            <v-flex md6>
+            <v-flex md6 v-if="profile.birthday">
                 <v-banner two-line>
                     <v-avatar slot="icon" color="primary accent-4" size="40">
-                    <v-icon color="white">fas fa-map-marker-alt</v-icon>
+                    <v-icon color="white">fas fa-birthday-cake</v-icon>
                     </v-avatar>
-                        MObios<br><span>birthday</span>
+                        {{profile.birthday}}<br><span class="grey--text caption">BirthDay</span>
                 </v-banner>
             </v-flex>
-            <v-flex md6>
+            <v-flex md6 v-if="profile.religious">
                 <v-banner two-line>
                     <v-avatar slot="icon" color="primary accent-4" size="40">
                     <v-icon color="white">fas fa-map-marker-alt</v-icon>
                     </v-avatar>
-                        MObios<br><span>Relijans</span>
+                        {{profile.religious}}<br><span class="grey--text caption">Religious</span>
                 </v-banner>
             </v-flex>
-            <v-flex md6>
+            <v-flex md6 v-if="profile.gender">
                 <v-banner two-line>
                     <v-avatar slot="icon" color="primary accent-4" size="40">
-                    <v-icon color="white">fas fa-map-marker-alt</v-icon>
+                    <v-icon color="white">fas fa-user</v-icon>
                     </v-avatar>
-                        MObios<br><span>gender</span>
+                        {{profile.gender}}<br><span class="grey--text caption">Gender</span>
                 </v-banner>
             </v-flex>
-            <v-flex md6>
+            <v-flex md6 v-if="profile.sivilstatus">
                 <v-banner two-line>
                     <v-avatar slot="icon" color="primary accent-4" size="40">
-                    <v-icon color="white">fas fa-map-marker-alt</v-icon>
+                    <v-icon color="white"> fas fa-heart</v-icon>
                     </v-avatar>
-                        MObios<br><span>sivil status</span>
+                        {{profile.sivilstatus}}<br><span class="grey--text caption">sivil status</span>
                 </v-banner>
             </v-flex>
          </v-layout>
        </v-content>
-       <v-content>
-           <v-layout row v-if="!!profile.skills">
+       <v-content v-if="!!profile.skills">
+           <h2>Skills</h2>
+           <v-layout row >
+                
               <v-flex v-for="skill in profile.skills" :key="skill.id" md-3>
-                  {{skill}}
+                <v-banner two-line>
+                    <v-icon size="15" > fa fa-bullseye</v-icon>
+                    {{skill}}
+                </v-banner>
               </v-flex>
            </v-layout>
        </v-content>
+       <!-- <v-content v-if="!!profile.skills">
+           <h2>Skills</h2>
+           <v-layout row >
+                
+              <v-flex v-for="skill in profile.skills" :key="skill.id" md-3>
+                <v-banner two-line>
+                    <v-icon size="15" > fa fa-bullseye</v-icon>
+                    {{skill}}
+                </v-banner>
+              </v-flex>
+           </v-layout>
+       </v-content> -->
 
     </v-container>
 </template>

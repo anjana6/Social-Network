@@ -6,29 +6,50 @@ const porfileShema = Schema({
         type:Schema.Types.ObjectId,
         ref: 'User'
     },
-    company:{
+    workplace:{
         type:String,
     },
-    location:{
+    currentcity:{
         type:String,
+        required:true
 
+    },
+    hometown:{
+        type:String,
+        required:true
     },
     skills:{
         type:[String],
         required:true
     },
-    education:[
-        {
-            School:{
-                type:String,
-                required:true
-            },
-            degree:{
-                type:String,
-                required:true
-            }
-        }
-    ],
+    primeryschool:{
+        type:String,
+    },
+    secondaryschool:{
+        type:String,
+        required:true
+    },
+    university:{
+        type:String,
+    },
+    birthday:{
+        type:Date
+    },
+    religious:{
+        type:String
+    },
+    gender:{
+        type:String
+    },
+    sivilstatus:{
+        type:String
+    },
+    mobileNo:{
+        type:String
+    },
+    telNo:{
+        type:String
+    },
     date:{
         type:Date,
         default:Date.now
