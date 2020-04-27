@@ -8,7 +8,7 @@ const router = express.Router();
 
 
 router.post("/",auth,async(req,res) => {
-   const {workplace,currentcity,hometown,skills,pirmeryschool,secondaryschool,university,birthday,
+   const {workplace,currentcity,hometown,skills,primeryschool,secondaryschool,university,birthday,
 religious,gender,sivilstatus,mobileNo,telNo} = req.body;
 
     const profileField = {}
