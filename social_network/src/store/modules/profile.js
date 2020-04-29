@@ -47,7 +47,24 @@ const actions = {
             console.log(error);
             
         }
-    }
+    },
+    createProfile: async ({commit},body) => {
+        console.log(body);
+        const config = {
+            headers:{
+                'Content-Type':'application/json'
+            }
+        };
+        try {
+            const res = await axios.post('http://localhost:5000/profile/',body,config);
+            console.log(res.data);
+            commit(console.log('hoo'))
+
+        } catch (err) {
+            const error = err.reponsel.data.errors;
+            console.log(error);
+        }
+    } 
 }
 
 const mutations = {

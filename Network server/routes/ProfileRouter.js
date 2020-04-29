@@ -11,6 +11,8 @@ router.post("/",auth,async(req,res) => {
    const {workplace,currentcity,hometown,skills,primeryschool,secondaryschool,university,birthday,
 religious,gender,sivilstatus,mobileNo,telNo} = req.body;
 
+
+
     const profileField = {}
     profileField.user = req.user.id;
     if(workplace) profileField.workplace = workplace;
@@ -26,10 +28,16 @@ religious,gender,sivilstatus,mobileNo,telNo} = req.body;
     if(sivilstatus) profileField.sivilstatus = sivilstatus;
     if(mobileNo) profileField.mobileNo = mobileNo;
     if(telNo) profileField.telNo = telNo;
-
-    
      try {
-        const profile = new Profile(profileField);
+         let profile = await Profile.findOne({user:req.user.id});
+
+         if(profile) {
+             profile = await Profile.findOneAndUpdate(
+                 {user:req.user.id},
+                 {$set: profileField},
+             );
+         }
+         profile = new Profile(profileField);
         await profile.save()
         res.json(profile);
     } catch (err) {
@@ -44,7 +52,6 @@ router.get('/me',auth,async (req,res) => {
     try {
         const profile = await Profile.findOne({user:req.user.id})
         .populate('user',['name','avatar']);
-        console.log(profile)
         if(!profile){
             return res.status(401).json({msg:"There is no profile for you"})
         }

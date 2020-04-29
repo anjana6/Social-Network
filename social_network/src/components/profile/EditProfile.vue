@@ -1,12 +1,55 @@
 
-        <template>
-  <v-form>
+
+      <template>
+  <v-form >
     <v-container>
-        <!-- {{ownerprofile.workplace}} -->
+      <div>{{ownerprofile}}</div>
+      <v-row>
+        <v-col
+          cols="12"
+          md="4"
+        >
+          <v-text-field
+            v-model="workplace"
+            label="Work Place"
+            required
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          md="4"
+        >
+          <v-text-field
+            v-model="lastname"
+            label="Last name"
+            required
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          md="4"
+        >
+          <v-text-field
+            v-model="email"
+            label="E-mail"
+            required
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-content class="content-bar pa-1">
+        <v-icon left>fas fa-graduation-cap</v-icon>
+        <span>Education</span>
+      </v-content>
+    </v-container>
+  </v-form>
+</template>
+        <!-- <v-form ref="form" lazy-validation>
       <v-row>
         <v-col cols="12" md="4">
           <v-text-field
-            v-model="profile.workplace"
+            v-model="workplace"
             label="Work Place"
             required
           ></v-text-field>
@@ -27,8 +70,8 @@
             required
           ></v-text-field>
         </v-col>
-      </v-row>
-      <v-content class="content-bar pa-1">
+      </v-row> -->
+      <!-- <v-content class="content-bar pa-1">
         <v-icon left>fas fa-graduation-cap</v-icon>
         <span>Education</span>
       </v-content>
@@ -104,37 +147,49 @@
           ></v-text-field>
         </v-col>
        </v-row>
-       <v-btn block color="primary" dark @click="createProfile">Save Changes</v-btn>
-    </v-container>
-    <v-btn >submit</v-btn>
-  </v-form>
-</template>
+       <v-btn block color="primary" dark @click="editProfile">Save Changes</v-btn> -->
+       <!-- </v-form> -->
+
     
 <script>
-import {mapGetters} from 'vuex';
+import {mapActions,mapGetters} from 'vuex';
 export default {
     name:"EditProfile",
     data (){
        return{
-           profile:{}
+           workplace:''
        }
     },
     computed:{
         ...mapGetters(['ownerprofile'])
     },
-    created(){
-        this.profile = this.ownerprofile
-    },
     methods:{
-    
-    createProfile: function(){
-        console.log('lll')
+    ...mapActions(['createProfile','fetchOwnerProfile']),
+    editProfile: function(){
+        // console.log
          let data = {
-             workplace:this.profile.workplace
+             workplace:this.profile.workplace,
+             currentcity:this.profile.currentcity,
+             hometown:this.profile.hometown,
+             primeryschool:this.profile.primeryschool,
+             secondaryschool:this.profile.secondaryschool,
+             university:this.profile.university,
+             birthday:this.profile.birthday,
+             religious:this.profile.religious,
+             gender:this.profile.gender,
+             sivilstatus:this.profile.sivilstatus,
+             skills:this.profile.skills
         }
-    console.log(data);
-    }
-       
+    this.createProfile(data);
+    }  
+    },
+     created(){
+        this.fetchOwnerProfile();
+        // this.workplace = this.ownerprofile.workplace;
+        
+    },
+    updated(){
+      this.workplace = this.ownerprofile.workplace;
     }
 }
 </script>
