@@ -1,11 +1,18 @@
 <template>
   <v-container>
-    <v-form ref="form" lazy-validation v-if="ownerprofile">
+    <v-content>
+      <v-layout row class="mb-5">
+            <v-flex>
+                <h1 class="display-2 text-center">CREATE PROFILE</h1>
+            </v-flex>
+      </v-layout>
+    </v-content>
+    <v-form ref="form" lazy-validation>
       
         <v-row>
           <v-col cols="12" md="4">
             <v-text-field
-              v-model="profile.workplace"
+              v-model="workplace"
               label="Work Place"
               required
             ></v-text-field>
@@ -13,7 +20,7 @@
 
           <v-col cols="12" md="4">
             <v-text-field
-              v-model="profile.currentcity"
+              v-model="currentcity"
               label="Current City"
               required
             ></v-text-field>
@@ -21,7 +28,7 @@
 
           <v-col cols="12" md="4">
             <v-text-field
-              v-model="profile.hometown"
+              v-model="hometown"
               label="Home Town"
               required
             ></v-text-field>
@@ -36,7 +43,7 @@
       <v-row>
         <v-col cols="12" md="4">
           <v-text-field
-            v-model="profile.primeryschool"
+            v-model="primeryschool"
             label="Primery School"
             required
           ></v-text-field>
@@ -44,7 +51,7 @@
 
         <v-col cols="12" md="4">
           <v-text-field
-            v-model="profile.secondaryschool"
+            v-model="secondaryschool"
             label="Secondary School"
             required
           ></v-text-field>
@@ -52,7 +59,7 @@
 
         <v-col cols="12" md="4">
           <v-text-field
-            v-model="profile.university"
+            v-model="university"
             label="University"
             required
           ></v-text-field>
@@ -67,7 +74,7 @@
       <v-row>
         <v-col cols="12" md="6">
           <v-text-field
-            v-model="profile.birthday"
+            v-model="birthday"
             label="Birth Day"
             required
           ></v-text-field>
@@ -75,7 +82,7 @@
 
         <v-col cols="12" md="4">
           <v-text-field
-            v-model="profile.religious"
+            v-model="religious"
             label="Religious"
             required
           ></v-text-field>
@@ -85,7 +92,7 @@
       <v-row>
         <v-col cols="12" md="6">
           <v-text-field
-            v-model="profile.gender"
+            v-model="gender"
             label="Gender"
             required
           ></v-text-field>
@@ -93,7 +100,7 @@
 
         <v-col cols="12" md="4">
           <v-text-field
-            v-model="profile.sivilstatus"
+            v-model="sivilstatus"
             label="Sivil Status"
             required
           ></v-text-field>
@@ -107,13 +114,14 @@
       <v-row>
         <v-col cols="12" md="12">
           <v-text-field
-            v-model="profile.skills"
+            v-model="skills"
             label="Skills"
+            placeholder="HTML,React..."
             required
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-btn block color="primary" dark @click="editProfile">Save Changes</v-btn>
+      <v-btn block color="primary" dark @click="createProfile" to="/profile">ADD</v-btn>
     
   </v-form>
   </v-container>
@@ -126,8 +134,17 @@ export default {
     name:"EditProfile",
     data (){
        return{
-           profile:{}
-          // workplace:''
+          workplace:'',
+          currentcity:'',
+          hometown:'',
+          primeryschool:'',
+          secondaryschool:'',
+          university:'',
+          birthday:'',
+          religious:'',
+          gender:'',
+          sivilstatus:'',
+          skills:'',
        }
     },
     computed:{
@@ -135,32 +152,25 @@ export default {
     },
     methods:{
     ...mapActions(['createProfile','fetchOwnerProfile']),
-    editProfile: function(){
+    createProfile: function(){
          let data = {
-             workplace:this.profile.workplace,
-             currentcity:this.profile.currentcity,
-             hometown:this.profile.hometown,
-             primeryschool:this.profile.primeryschool,
-             secondaryschool:this.profile.secondaryschool,
-             university:this.profile.university,
-             birthday:this.profile.birthday,
-             religious:this.profile.religious,
-             gender:this.profile.gender,
-             sivilstatus:this.profile.sivilstatus,
-             skills:this.profile.skills
+             workplace:this.workplace,
+             currentcity:this.currentcity,
+             hometown:this.hometown,
+             primeryschool:this.primeryschool,
+             secondaryschool:this.secondaryschool,
+             university:this.university,
+             birthday:this.birthday,
+             religious:this.religious,
+             gender:this.gender,
+             sivilstatus:this.sivilstatus,
+             skills:this.skills,
         }
-      console.log(data);
+
       this.createProfile(data);
     }  
     },
-    created(){
-        this.fetchOwnerProfile();
-        
-    },
-    updated(){
-      // this.workplace = this.ownerprofile.workplace;
-      this.profile = this.ownerprofile
-    }
+    
 }
 </script>
 
@@ -169,5 +179,6 @@ export default {
     border: 2px solid grey;
     text-align: center;
     border-radius: 2px;
+    background-color: rgb(0, 195, 255);
   }
 </style>

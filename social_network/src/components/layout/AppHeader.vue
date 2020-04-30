@@ -11,7 +11,7 @@
             
           <v-spacer></v-spacer>
           <div v-if="isLoggedIn">
-            <v-btn depressed color="grey">
+            <v-btn depressed color="grey" to="/post">
               <span>Home</span>
               <v-icon small right>fas fa-home</v-icon>
             </v-btn>

@@ -18,7 +18,9 @@ religious,gender,sivilstatus,mobileNo,telNo} = req.body;
     if(workplace) profileField.workplace = workplace;
     profileField.currentcity = currentcity;
     profileField.hometown = hometown;
-    profileField.skills = skills.split(',').map(skill => skill.trim());
+    if (skills) {
+        profileField.skills = skills.split(',').map(skill => skill.trim());
+    }
     if(primeryschool) profileField.primeryschool = primeryschool;
     profileField.secondaryschool = secondaryschool;
     if(university) profileField.university = university;
@@ -36,6 +38,7 @@ religious,gender,sivilstatus,mobileNo,telNo} = req.body;
                  {user:req.user.id},
                  {$set: profileField},
              );
+             return res.json(profile);
          }
          profile = new Profile(profileField);
         await profile.save()

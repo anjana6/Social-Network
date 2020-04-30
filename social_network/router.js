@@ -7,11 +7,11 @@ import SignUpForm from './src/components/auth/SignUpForm';
 import Post from './src/components/post/Post';
 import Comment from './src/components/post/Comment';
 import AddPost from './src/components/post/AddPost';
-import Profile from './src/components/profile/Profile';
+// import Profile from './src/components/profile/Profile';
 import DeveloperProfile from './src/components/profile/DeveloperProfile';
 import About from './src/components/profile/About'
 import EditProfile from './src/components/profile/EditProfile';
-
+import DisplayProfile from './src/components/profile/DisplayProfile';
 
 
 Vue.use(VueRouter);
@@ -37,9 +37,10 @@ export const router = new VueRouter({
     {path:'/post',name:'post',component:Post},
     {path:'/comment/:comment_id',name:'comment',component:Comment},
     {path:'/addpost',name:'addpost',component:AddPost},
-    {path:'/profile',name:'profile',component:Profile},
+    // {path:'/profile',name:'profile',component:Profile},
     {path:'/developer',name:'developer', component: DeveloperProfile},
     {path:'/about/:id',name:'about',component: About},
-    {path:'/editprofile',name:'editprofile',component:EditProfile}
+    { path: '/editprofile', name: 'editprofile', component: EditProfile },
+    {path:'/profile',name:'profile',component:DisplayProfile}
   ]
 })

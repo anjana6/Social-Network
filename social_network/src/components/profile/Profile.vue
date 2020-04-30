@@ -1,5 +1,5 @@
 <template>
-    <v-container v-if="ownerprofile">
+    <v-container>
         <v-content >
             <v-layout row m-5 class="pro-header">
                 <v-flex xs4>
@@ -135,18 +135,19 @@
 </template>
 
 <script>
-import {mapActions,mapGetters} from 'vuex';
+// import {mapActions,mapGetters} from 'vuex';
 export default {
     name:'Profile',
-    computed:{
-        ...mapGetters(['ownerprofile','isProfile'])
-    },
-    methods:{
-        ...mapActions(['fetchOwnerProfile'])
-    },
-    created(){
-        this.fetchOwnerProfile()
-    }
+    props:['ownerprofile'],
+    // computed:{
+    //     ...mapGetters(['ownerprofile','isProfile'])
+    // },
+    // methods:{
+    //     ...mapActions(['fetchOwnerProfile'])
+    // },
+    // created(){
+    //     this.fetchOwnerProfile()
+    // }
 
 }
 </script>
