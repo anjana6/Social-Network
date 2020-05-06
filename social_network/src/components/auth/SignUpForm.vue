@@ -1,5 +1,10 @@
 <template>
     <v-container>
+        <div v-if="!!error">
+            <v-alert type="error" v-if="error.msg" >
+            {{error.msg}}
+            </v-alert>  
+        </div>
         <v-card
             class="mx-auto"
             outlined
@@ -17,21 +22,22 @@
                         label="Name"
                         required
                     ></v-text-field>
-
+                    <div v-if="!!error" class="red--text">{{error.name}}</div>
                     <v-text-field
                         v-model="email"
                         label="Email"
                         required
                     ></v-text-field>
-
+                    <div v-if="!!error" class="red--text">{{error.email}}</div>
                     <v-text-field
                         v-model="password"
                         label="Password"
                         required
                     ></v-text-field>
+                    <div v-if="!!error" class="red--text">{{error.password}}</div>
                     </v-card-text>
                     <v-card-actions>
-                    <v-btn color="error" class="mr-4" @click="register">
+                    <v-btn color="error" class="mr-4" @click="registering">
                         Submit
                     </v-btn>
                     <v-btn color="error" text class="mr-4" to="/">
@@ -45,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions,mapGetters} from 'vuex';
 export default {
     name:"SignUpForm",
     data(){
@@ -55,9 +61,13 @@ export default {
             password:''
         }
     },
+    computed:{
+        ...mapGetters(['error'])
+    },
     methods:{
         ...mapActions(['register']),
-        register:function(){
+        registering:function(){
+            console.log('hoo')
             let data = {
                 name:this.name,
                 email:this.email,

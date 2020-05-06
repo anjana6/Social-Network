@@ -20,14 +20,16 @@ router.post(
     async(req,res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()){
-            return res.status(400).json({error: errors.array()});
+            let error = {}
+            errors.array().map(err => error[err.param]= err.msg)
+            return res.status(400).json({error});
         }
     const {name,email,password} = req.body;
    
     try {
         let user = await User.findOne({email});
         if(user){
-            return res.status(402).json({error:"User already exists"})
+            return res.status(402).json({error:{msg:"User already exists"}})
         }
 
         const avatar = gravatar.url(email,{s:"200",r:"pg",d:"mm"});
@@ -48,7 +50,7 @@ router.post(
 
         jwt.sign(payload,
             config.get("jwtSecret"),
-            {expiresIn:36000},(err,token) =>{
+            (err,token) =>{
                 if(err) throw err;
                 res.json({token});
             }
@@ -73,18 +75,16 @@ router.post(
             errors.array().map(err => error[err.param] = err.msg)
             return res.status(400).json({error})
         }
-        // console.log("hoii");
-        // console.log(req.body);
     const {email,password} = req.body;
 
     try {
         const user = await User.findOne({email});
     if(!user){
-       return  res.status(400).json({errors:[{msg:"Please Register"}]})
+       return  res.status(400).json({error:{msg:"Please Register or Enter valid Email"}})
     };
     const isMatch  = await bcrypt.compare(password,user.password);
     if(!isMatch){
-        return res.status(400).json({errors:[{msg:"Your Password is not match"}]});
+        return res.status(400).json({error:{msg:"Your Password is not match"}});
     };
 
     const payload = {
@@ -95,7 +95,7 @@ router.post(
     }
      jwt.sign(payload,
         config.get("jwtSecret"),
-        {expiresIn:36000},(err,token) =>{
+        (err,token) =>{
             if(err) throw err;
             res.json({token});
         }

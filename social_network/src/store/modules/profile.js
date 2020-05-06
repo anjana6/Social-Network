@@ -15,7 +15,6 @@ const getters = {
 
 const actions = {
     fetchOwnerProfile: async({commit}) => {
-        console.log("ooo");
         try {
             const res = await axios.get('http://localhost:5000/profile/me');
             console.log(res.data);
@@ -49,7 +48,6 @@ const actions = {
         }
     },
     createProfile: async ({commit},body) => {
-        // console.log(body);
         const config = {
             headers:{
                 'Content-Type':'application/json'
@@ -58,7 +56,7 @@ const actions = {
         try {
             const res = await axios.post('http://localhost:5000/profile/',body,config);
             console.log(res.data);
-            commit(console.log('ho'))
+            commit('create_profile',res.data);
 
         } catch (err) {
             const error = err.reponsel.data.errors;
@@ -76,6 +74,9 @@ const mutations = {
     },
     fetch_profile: (state, profile) => {
         state.profile = profile
+    },
+    create_profile: (state,profile) => {
+        state.ownerprofile = profile
     }
 }
 
