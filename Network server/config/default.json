@@ -1,4 +1,7 @@
 {
     "mongoURI": "mongodb://localhost:27017/social-network",
-    "jwtSecret": "MyScreet"
+    "jwtSecret": "MyScreet",
+    "cloud_name":"ashakthi",
+    "api_key":"566978478781933",
+    "api_secret":"-YcmpnfonlpwqOlxeMtFZfnGF1A"
 }

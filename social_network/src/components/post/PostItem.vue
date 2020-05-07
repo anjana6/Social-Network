@@ -10,13 +10,13 @@
       </v-list-item-content>
     </v-list-item>
 
-    <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-      height="194"
+    <v-img v-if="post.imageUrl"
+      :src="post.imageUrl"
+      height="400"
     ></v-img>
 
     <v-card-text>
-      <h2>{{post.text}}</h2>
+      <p>{{post.text}}</p>
       <v-layout row>
         <v-flex>
           <p v-if="post.likes.length>0"><v-icon small right>fas fa-thumbs-up</v-icon><span class="ml-1">{{post.likes.length}}</span></p>

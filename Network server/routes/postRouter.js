@@ -3,23 +3,30 @@ const {check,validationResult} = require('express-validator');
 const User = require("../models/User");
 const Post = require("../models/Post");
 const auth = require("../middleware/auth");
+const imageUpload = require('../config/upload');
 
 const router = express.Router();
 
-router.post("/",auth,async(req,res) => {
+router.post("/image",auth,async(req,res) => {
     
-    try {
-        const file = req.files.photo;
-        console.log(file);
-        const user = await User.findById(req.user.id).select("-password");
-        
-        const newPost = new Post({
-            text:req.body.text,
-            name:user.name,
-            avatar:user.avatar,
-            user:req.user.id
+   
 
-        });
+    try {
+        const postData = {};
+        const user = await User.findById(req.user.id).select("-password");
+        if(req.files.photo){
+            const file = req.files.photo;
+            const result = await imageUpload(file);
+            console.log(result);
+            postData.imageId = result.public_id;
+            postData.imageUrl = result.url;
+        }
+        if(req.body.text) postData.text=req.body.text;
+        postData.name = user.name;
+        postData.avatar = user.avatar;
+        postData.user = req.user.id;
+        
+        const newPost = new Post(postData);
 
         const post = await newPost.save();
         res.status(200).json({post});
@@ -30,6 +37,29 @@ router.post("/",auth,async(req,res) => {
         
     }
 });
+
+router.post("/text",auth,async(req,res) => {
+    
+    try {
+        const postData = {};
+        const user = await User.findById(req.user.id).select("-password");
+        if(req.body.text) postData.text=req.body.text;
+        postData.name = user.name;
+        postData.avatar = user.avatar;
+        postData.user = req.user.id;
+        
+        const newPost = new Post(postData);
+
+        const post = await newPost.save();
+        res.status(200).json({post});
+
+    } catch (err) {
+        console.log(err.message);
+        res.status(501).send("Server Error");
+        
+    }
+});
+
 
 router.get('/',auth,async (req,res) => {
     try {

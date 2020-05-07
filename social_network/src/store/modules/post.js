@@ -1,4 +1,5 @@
 import axios from "axios";
+import {router} from '../../../router';
 
 const state ={
     loading: true,
@@ -17,6 +18,7 @@ const actions = {
     fetchPosts: async({commit}) => {
         try {
             const res = await axios.get('http://localhost:5000/post/');
+            console.log(res.data);
             commit('get_post',res.data);
         } catch (err) {
             const errors = err.response.data.errors;
@@ -25,9 +27,9 @@ const actions = {
     },
     addPost: async({commit},data) => {
        
-        console.log(data.file)
+        console.log(data.file);
+        console.log(data.text);
         const formData = new FormData();
-        
         formData.append('photo',data.file);
         formData.append('text',data.text);
         
@@ -36,10 +38,15 @@ const actions = {
                 'Content-Type':'multipart/form-data'
             }
         };
-        // const body = JSON.stringify({});
         try {
-            const res = await axios.post('http://localhost:5000/post/',formData,config);
+            let res = null;
+            if(data.file !== null){
+                res = await axios.post('http://localhost:5000/post/image',formData,config);
+            }else{
+                res = await axios.post('http://localhost:5000/post/text',formData,config);
+            }
             console.log(res.data);
+            router.push('/post');
             commit('add_post');
         } catch (err) {
             const errors = err.response.data.errors;

@@ -13,7 +13,7 @@ connectDB();
 
 app.use(express.json({extended:false}));
 app.use(cors());
-app.use(fileUpload());
+app.use(fileUpload({useTempFiles:true}));
 
 
 app.use('/auth',authRouter);

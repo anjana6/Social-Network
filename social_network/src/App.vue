@@ -1,10 +1,15 @@
 <template>
   <v-app>
-    
+   
       <AppHeader/>
+    
+
+      
      <!-- <Home/> -->
      <!-- <SignUpForm/> -->
+     <v-content>
      <router-view></router-view>
+     </v-content>
     
   </v-app>
   
