@@ -23,16 +23,22 @@ const actions = {
             console.log(errors);
         }
     },
-    addPost: async({commit},text) => {
-        console.log(text);
+    addPost: async({commit},data) => {
+       
+        console.log(data.file)
+        const formData = new FormData();
+        
+        formData.append('photo',data.file);
+        formData.append('text',data.text);
+        
         const config = {
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'multipart/form-data'
             }
         };
-        const body = JSON.stringify({text});
+        // const body = JSON.stringify({});
         try {
-            const res = await axios.post('http://localhost:5000/post/',body,config);
+            const res = await axios.post('http://localhost:5000/post/',formData,config);
             console.log(res.data);
             commit('add_post');
         } catch (err) {

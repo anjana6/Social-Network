@@ -65,11 +65,12 @@ export default {
 
         },
         addpost: function(){
+           
             let data = {
                 file:this.file,
                 text:this.text
             }
-            console.log(data);
+            // console.log(data);
             this.addPost(data);
         }
     }

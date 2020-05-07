@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
-const cors = require('cors')
+const cors = require('cors');
+const fileUpload = require('express-fileupload');
 const app = express();
 
 const authRouter = require('./routes/authRouter');
@@ -12,6 +13,7 @@ connectDB();
 
 app.use(express.json({extended:false}));
 app.use(cors());
+app.use(fileUpload());
 
 
 app.use('/auth',authRouter);

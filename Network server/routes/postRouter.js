@@ -9,9 +9,10 @@ const router = express.Router();
 router.post("/",auth,async(req,res) => {
     
     try {
-        //console.log(req.userId);
+        const file = req.files.photo;
+        console.log(file);
         const user = await User.findById(req.user.id).select("-password");
-        //console.log(user);
+        
         const newPost = new Post({
             text:req.body.text,
             name:user.name,
